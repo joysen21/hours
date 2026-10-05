@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Stunden">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#0f5f5a">
+<title>Stunden</title>
+<link rel="icon" type="image/png" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+</head>
+<body>
+<main>
+<section id="v-load">
+  <p class="mut">Lädt …</p>
+</section>
+
+<section id="v-config" hidden>
+  <h1>Konfiguration fehlt</h1>
+  <p>Die Umgebungsvariablen <code>VITE_SUPABASE_URL</code> und <code>VITE_SUPABASE_KEY</code> sind nicht gesetzt. Siehe README.</p>
+</section>
+
+<section id="v-login" hidden>
+  <h1>Stunden</h1>
+  <p class="mut" id="lmode">Melde dich an, um deine Stunden zu erfassen.</p>
+  <form id="lf">
+    <label>E-Mail<input type="email" id="le" autocomplete="email" required></label>
+    <label>Passwort<input type="password" id="lp" autocomplete="current-password" minlength="6" required></label>
+    <button class="primary" id="lb" type="submit">Anmelden</button>
+  </form>
+  <p id="lmsg" role="status"></p>
+  <div class="links">
+    <button class="link" id="ltog" type="button">Noch kein Konto? Registrieren</button>
+    <button class="link" id="lfgt" type="button">Passwort vergessen?</button>
+  </div>
+</section>
+
+<section id="v-reset" hidden>
+  <h1>Neues Passwort</h1>
+  <form id="rf">
+    <label>Neues Passwort<input type="password" id="rp" autocomplete="new-password" minlength="6" required></label>
+    <button class="primary" type="submit">Passwort speichern</button>
+  </form>
+  <p id="rmsg" role="status"></p>
+</section>
+
+<section id="v-erfassen" hidden>
+  <h1>Stunden erfassen</h1>
+  <div id="noc" hidden>
+    <p>Es gibt noch keinen Kunden. Lege zuerst einen Kunden an.</p>
+    <button class="primary" id="goc">Kunden anlegen</button>
+  </div>
+  <div id="form">
+    <label>Kunde<select id="cs"></select></label>
+    <label>Tag<input type="date" id="dt"></label>
+    <div class="hrs">
+      <button id="mi" aria-label="0,5 Stunden weniger">−</button>
+      <input id="hr" type="number" inputmode="decimal" step="0.25" min="0" max="24" placeholder="0" aria-label="Stunden">
+      <button id="pl" aria-label="0,5 Stunden mehr">+</button>
+    </div>
+    <p class="hint">Stunden an diesem Tag für diesen Kunden. Leer oder 0 löscht den Eintrag.</p>
+    <button class="primary" id="sv">Speichern</button>
+    <p id="msg" role="status"></p>
+  </div>
+</section>
+
+<section id="v-eintraege" hidden>
+  <h1>Einträge</h1>
+  <label>Monat<input type="month" id="mo"></label>
+  <div id="tots"></div>
+  <ul id="list"></ul>
+</section>
+
+<section id="v-auswertung" hidden>
+  <h1>Auswertung</h1>
+  <label>Jahr<select id="yr"></select></label>
+  <p class="mut" id="ysum"></p>
+  <h2>Stunden pro Monat</h2>
+  <div class="ch" id="mch"></div>
+  <p class="mut">Tippe auf einen Monat, um die Einträge zu sehen.</p>
+  <h2>Stunden je Kunde</h2>
+  <div id="cbar"></div>
+</section>
+
+<section id="v-kunden" hidden>
+  <h1>Kunden</h1>
+  <p class="mut" id="cnt"></p>
+  <ul id="cl"></ul>
+  <div class="add"><input type="text" id="nn" placeholder="Name des Hotels" aria-label="Neuer Kunde"><button class="sec" id="na">Hinzufügen</button></div>
+  <p id="cmsg" class="err" role="status"></p>
+
+  <h2>Sicherung</h2>
+  <p class="mut">Die Daten liegen sicher in der Cloud. Optional kannst du eine Sicherung als Text kopieren – oder eine Sicherung aus der alten iPhone-Version hier einfügen und importieren.</p>
+  <button class="sec" id="cp">Sicherung kopieren</button>
+  <textarea id="bk" aria-label="Sicherungstext" placeholder="Sicherungstext hier einfügen, dann importieren"></textarea>
+  <div style="margin-top:10px"><button class="sec" id="rs">Importieren</button></div>
+  <p id="bmsg" role="status"></p>
+
+  <h2>Konto</h2>
+  <p class="mut" id="who"></p>
+  <button class="sec" id="lo">Abmelden</button>
+</section>
+</main>
+<nav id="nav" hidden>
+  <button data-v="erfassen">Erfassen</button>
+  <button data-v="eintraege">Einträge</button>
+  <button data-v="auswertung">Auswertung</button>
+  <button data-v="kunden">Kunden</button>
+</nav>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>

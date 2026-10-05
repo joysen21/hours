@@ -1,0 +1,50 @@
+:root{--bg:#eef1ef;--card:#fff;--ink:#16302d;--mut:#5d716e;--acc:#0f5f5a;--aci:#fff;--line:#d3dcd9;--err:#a3321f}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1918;--card:#182725;--ink:#e6f0ee;--mut:#8fa7a3;--acc:#4fb5ac;--aci:#06211f;--line:#2a3f3c;--err:#ff9a86}}
+:root[data-theme="dark"]{--bg:#0f1918;--card:#182725;--ink:#e6f0ee;--mut:#8fa7a3;--acc:#4fb5ac;--aci:#06211f;--line:#2a3f3c;--err:#ff9a86}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-text-size-adjust:100%}
+main{max-width:480px;margin:0 auto;padding:20px 18px 110px}
+h1{font-size:1.5rem;margin:8px 0 18px;letter-spacing:-.01em}
+h2{font-size:1.05rem;margin:28px 0 8px}
+label{display:block;font-weight:600;font-size:.9rem;margin:0 0 14px}
+select,input,textarea,button{font:inherit;color:inherit}
+select,input[type=date],input[type=month],input[type=text],input[type=email],input[type=password],textarea{display:block;width:100%;margin-top:6px;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--card);min-height:48px}
+textarea{min-height:90px;font-size:.8rem}
+code{font-size:.85em}
+.hrs{display:flex;gap:10px;align-items:stretch;margin:6px 0 4px}
+.hrs input{flex:1;min-width:0;text-align:center;font-size:3rem;font-weight:700;padding:8px;border:1px solid var(--line);border-radius:14px;background:var(--card);-moz-appearance:textfield}
+.hrs button{width:64px;font-size:2rem;border:1px solid var(--line);border-radius:14px;background:var(--card);cursor:pointer}
+.hint,.mut{color:var(--mut);font-size:.85rem;margin:0 0 18px}
+button.primary{width:100%;min-height:52px;border:0;border-radius:12px;background:var(--acc);color:var(--aci);font-weight:700;font-size:1.05rem;cursor:pointer}
+button.sec{min-height:44px;padding:0 16px;border:1px solid var(--line);border-radius:10px;background:var(--card);cursor:pointer}
+button.link{border:0;background:none;color:var(--acc);padding:10px 0;cursor:pointer;font-size:.95rem;text-align:left}
+button:disabled{opacity:.55;cursor:default}
+.links{display:flex;flex-direction:column;align-items:flex-start;margin-top:8px}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+#msg,#bmsg,#lmsg,#rmsg{min-height:1.4em;margin:12px 0 0;font-size:.95rem}
+.err{color:var(--err)}
+ul{list-style:none;margin:0;padding:0}
+.row{display:flex;justify-content:space-between;align-items:center;width:100%;padding:13px 4px;border:0;border-bottom:1px solid var(--line);background:none;text-align:left;cursor:pointer}
+.row b{font-variant-numeric:tabular-nums}
+.tot{display:flex;justify-content:space-between;padding:6px 4px;font-variant-numeric:tabular-nums}
+.tot.all{border-top:2px solid var(--ink);margin-top:6px;padding-top:10px;font-weight:700}
+.add{display:flex;gap:10px;margin-top:10px}
+.add input{margin:0;flex:1}
+ul input[type=text]{margin:0 0 8px}
+.ch{display:flex;gap:3px;align-items:flex-end;margin:10px 0 6px}
+.col{flex:1;min-width:0;height:190px;display:flex;flex-direction:column;justify-content:flex-end;align-items:stretch;padding:0;border:0;background:none;cursor:pointer}
+.col .v{font-size:.68rem;text-align:center;color:var(--mut);min-height:1em;font-variant-numeric:tabular-nums}
+.col .bar{display:flex;flex-direction:column-reverse;border-radius:4px 4px 0 0;overflow:hidden}
+.col .bar i{display:block;min-height:0}
+.col .l{font-size:.7rem;text-align:center;color:var(--mut);padding-top:4px;border-top:1px solid var(--ink)}
+.cr{margin:0 0 14px}
+.cr .t{display:flex;justify-content:space-between;align-items:center;font-size:.9rem;margin-bottom:4px;font-variant-numeric:tabular-nums}
+.cr .d{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:8px;vertical-align:-1px}
+.cr .tr{height:12px;background:var(--line);border-radius:6px;overflow:hidden}
+.cr .tr i{display:block;height:100%;border-radius:6px}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--card);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav[hidden]{display:none}
+nav button{flex:1;min-height:56px;border:0;background:none;color:var(--mut);font-weight:600;font-size:.85rem;cursor:pointer}
+nav button[aria-current=true]{color:var(--acc);box-shadow:inset 0 3px 0 var(--acc)}
