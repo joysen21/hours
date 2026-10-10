@@ -92,6 +92,8 @@ function step(d) {
 async function saveEntry() {
   const raw = String($('#hr').value).replace(',', '.').trim(), c = $('#cs').value, d = $('#dt').value
   if (!c || !d) return say($('#msg'), 'Bitte Kunde und Tag wählen.', 1)
+  // Ungültige Eingabe liefert value '' – darf nicht als „leer = löschen“ gelten
+  if ($('#hr').validity.badInput) return say($('#msg'), 'Bitte eine Zahl zwischen 0 und 24 eingeben.', 1)
   const v = raw === '' ? 0 : Math.round(parseFloat(raw) * 100) / 100
   if (isNaN(v) || v < 0 || v > 24) return say($('#msg'), 'Bitte eine Zahl zwischen 0 und 24 eingeben.', 1)
   const k = c + '|' + d, btn = $('#sv')
@@ -218,7 +220,7 @@ async function restore() {
   let p
   try {
     p = JSON.parse($('#bk').value)
-    if (!p || !Array.isArray(p.customers) || typeof p.entries !== 'object') throw 0
+    if (!p || !Array.isArray(p.customers) || !p.entries || typeof p.entries !== 'object') throw 0
   } catch (e) { return say(m, 'Der Text ist keine gültige Sicherung.', 1) }
 
   const btn = $('#rs'); btn.disabled = true; say(m, 'Importiert …')
@@ -328,7 +330,8 @@ if (!configured) {
       if (!nu) { user = null; loaded = false; S = { customers: [], entries: {} }; setLoginMode(false); return show('login') }
       const changed = !user || user.id !== nu.id
       user = nu
-      if (changed && (event === 'INITIAL_SESSION' || event === 'SIGNED_IN')) { loaded = false; enterApp() }
+      // !loaded: nach einem Ladefehler muss eine erneute Anmeldung desselben Benutzers neu laden
+      if ((changed || !loaded) && (event === 'INITIAL_SESSION' || event === 'SIGNED_IN')) { loaded = false; enterApp() }
     }, 0)
   })
 }
